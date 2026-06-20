@@ -1,17 +1,15 @@
 const ORIGINAL_URL = "https://iptv-eldbert.xyz/iptv/channels.json";
-// This proxy adds the headers your browser needs
-const PROXY_URL = "https://api.allorigins.win/get?url=" + encodeURIComponent(ORIGINAL_URL);
+// This is a more robust, bypass-focused proxy
+const PROXY_URL = "https://corsproxy.io/?" + encodeURIComponent(ORIGINAL_URL);
 
-const MY_CHANNELS = ["⚽️ DSports", "⚽️ DSports Plus", "⚽️ Telemundo USA"];
+const MY_CHANNELS = ["DSports", "DSports Plus", "Telemundo USA"];
 
 async function updateDashboard() {
     const app = document.getElementById('app');
     
     try {
         const response = await fetch(PROXY_URL);
-        const data = await response.json();
-        // The proxy returns the real data inside a 'contents' field
-        const channels = JSON.parse(data.contents); 
+        const channels = await response.json(); // corsproxy.io returns the data directly!
         
         app.innerHTML = ''; 
 
@@ -29,7 +27,7 @@ async function updateDashboard() {
         });
     } catch (e) {
         console.error(e);
-        app.innerHTML = 'Error loading. Please refresh!';
+        app.innerHTML = 'Still blocked? Try disabling any AdBlockers or refresh once more!';
     }
 }
 
