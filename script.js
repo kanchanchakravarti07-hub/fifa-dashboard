@@ -1,17 +1,22 @@
-const JSON_URL = "https://iptv-eldbert.xyz/iptv/channels.json";
+const ORIGINAL_URL = "https://iptv-eldbert.xyz/iptv/channels.json";
+// This proxy adds the headers your browser needs
+const PROXY_URL = "https://api.allorigins.win/get?url=" + encodeURIComponent(ORIGINAL_URL);
+
 const MY_CHANNELS = ["⚽️ DSports", "⚽️ DSports Plus", "⚽️ Telemundo USA"];
 
 async function updateDashboard() {
     const app = document.getElementById('app');
-    app.innerHTML = 'Fetching fresh links...';
-
+    
     try {
-        const response = await fetch(JSON_URL);
+        const response = await fetch(PROXY_URL);
         const data = await response.json();
-        app.innerHTML = ''; // Clear loading text
+        // The proxy returns the real data inside a 'contents' field
+        const channels = JSON.parse(data.contents); 
+        
+        app.innerHTML = ''; 
 
         MY_CHANNELS.forEach(name => {
-            const ch = data.find(c => c.name.includes(name));
+            const ch = channels.find(c => c.name.includes(name));
             if (ch) {
                 const card = document.createElement('div');
                 card.className = 'channel-card';
@@ -23,9 +28,9 @@ async function updateDashboard() {
             }
         });
     } catch (e) {
-        app.innerHTML = 'Failed to load streams. Refresh the page!';
+        console.error(e);
+        app.innerHTML = 'Error loading. Please refresh!';
     }
 }
 
-// Automatically run when the page loads
 updateDashboard();
