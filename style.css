@@ -1,0 +1,55 @@
+body {
+    background-color: #0f0f0f;
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+    margin: 0;
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #00e676;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+}
+
+.channel-card {
+    background-color: #1a1a1a;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    border: 1px solid #333;
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.channel-card:hover {
+    transform: scale(1.02);
+    border-color: #00e676;
+}
+
+button {
+    background-color: #00e676;
+    color: #000;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #00c853;
+}
